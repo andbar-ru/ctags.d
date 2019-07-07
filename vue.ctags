@@ -4,7 +4,13 @@
 --kinddef-vue=t,tag,tags
 --kinddef-vue=o,object,objects
 --kinddef-vue=p,property,properties
+--kinddef-vue=n,name,names
 --kinddef-vue=f,function,functions
+
+--_roledef-vue=p.watched,watched property
+--_roledef-vue=p.prop,property as prop
+--extras=+r
+--fields=+r
 
 --_tabledef-vue=toplevel
 --_tabledef-vue=htmlComment
@@ -52,7 +58,7 @@
 --_mtable-regex-vue=script/'//{tenter=singleQuoteString}
 --_mtable-regex-vue=script/"//{tenter=doubleQuoteString}
 --_mtable-regex-vue=script/\{//{tenter=block}
---_mtable-regex-vue=script/export default *\{\n/default/o/{tenter=component}
+--_mtable-regex-vue=script/export default *\{\n///{tenter=component}
 --_mtable-regex-vue=script/.//
 
 --_mtable-regex-vue=toplevelTag/<\/[^>]+>//{tleave}
@@ -73,10 +79,12 @@
 --_mtable-regex-vue=blockComment/\*\///{tleave}
 --_mtable-regex-vue=blockComment/.//
 
+--_mtable-regex-vue=singleQuoteString/\\\\'//{tleave}
 --_mtable-regex-vue=singleQuoteString/\\'//
 --_mtable-regex-vue=singleQuoteString/'//{tleave}
 --_mtable-regex-vue=singleQuoteString/.//
 
+--_mtable-regex-vue=doubleQuoteString/\\\\"//{tleave}
 --_mtable-regex-vue=doubleQuoteString/\\"//
 --_mtable-regex-vue=doubleQuoteString/"//{tleave}
 --_mtable-regex-vue=doubleQuoteString/.//
@@ -84,7 +92,7 @@
 --_mtable-regex-vue=component/\}//{tleave}
 --_mtable-regex-vue=component/\/\///{tenter=lineComment}
 --_mtable-regex-vue=component/\/\*//{tenter=blockComment}
---_mtable-regex-vue=component/['"]?name['"]?: *['"]([[:alpha:]_][[:alnum:]_-]*)['"]/\1/p/
+--_mtable-regex-vue=component/['"]?name['"]?: *['"]([[:alpha:]_][[:alnum:]_-]*)['"]/\1/n/
 --_mtable-regex-vue=component/['"]?components['"]?: *\{/components/o/{tenter=components}{scope=set}
 --_mtable-regex-vue=component/['"]?props['"]?: *\{/props/o/{tenter=propsObject}{scope=set}
 --_mtable-regex-vue=component/['"]?props['"]?: *\[/props/o/{tenter=propsArray}{scope=set}
@@ -92,7 +100,8 @@
 --_mtable-regex-vue=component/['"]?computed['"]?: *\{/computed/o/{tenter=computed}{scope=set}
 --_mtable-regex-vue=component/['"]?methods['"]?: *\{/methods/o/{tenter=methods}{scope=set}
 --_mtable-regex-vue=component/['"]?watch['"]?: *\{/watch/o/{tenter=watch}{scope=set}
---_mtable-regex-vue=component/['"]?([[:alnum:]_-]+)['"]?:?[^(\n]*\([^)]*\)/\1/f/
+--_mtable-regex-vue=component/['"]?([[:alnum:]_-]+)['"]: function *\([^)]*\)/\1/f/
+--_mtable-regex-vue=component/['"]?([[:alnum:]_-]+)['"]?:? *\([^)]*\)/\1/f/
 --_mtable-regex-vue=component/['"]?([[:alnum:]_-]+)['"]?:/\1/p/
 --_mtable-regex-vue=component/\{//{tenter=block}
 --_mtable-regex-vue=component/'//{tenter=singleQuoteString}
@@ -120,20 +129,20 @@
 --_mtable-regex-vue=watch/\/\///{tenter=lineComment}
 --_mtable-regex-vue=watch/\/\*//{tenter=blockComment}
 --_mtable-regex-vue=watch/\{//{tenter=block}
---_mtable-regex-vue=watch/['"]?([[:alnum:]_-]+)['"]?:?[^(\n]*\([^)]*\)/\1/f/{scope=ref}
+--_mtable-regex-vue=watch/['"]?([[:alnum:]_-]+)['"]?:?[^(\n]*\([^)]*\)/\1/p/{scope=ref}{_role=watched}
 --_mtable-regex-vue=watch/.//
 
 --_mtable-regex-vue=propsObject/\}//{tleave}
 --_mtable-regex-vue=propsObject/\/\///{tenter=lineComment}
 --_mtable-regex-vue=propsObject/\/\*//{tenter=blockComment}
---_mtable-regex-vue=propsObject/['"]?([[:alnum:]_-]+)['"]? *:/\1/p/{scope=ref}
+--_mtable-regex-vue=propsObject/['"]?([[:alnum:]_-]+)['"]? *:/\1/p/{scope=ref}{_role=prop}
 --_mtable-regex-vue=propsObject/\{//{tenter=block}
 --_mtable-regex-vue=propsObject/.//
 
 --_mtable-regex-vue=propsArray/\]//{tleave}
 --_mtable-regex-vue=propsArray/\/\///{tenter=lineComment}
 --_mtable-regex-vue=propsArray/\/\*//{tenter=blockComment}
---_mtable-regex-vue=propsArray/['"]([[:alnum:]_-]+)['"]/\1/p/{scope=ref}
+--_mtable-regex-vue=propsArray/['"]([[:alnum:]_-]+)['"]/\1/p/{scope=ref}{_role=prop}
 --_mtable-regex-vue=propsArray/.//
 
 --_mtable-regex-vue=data/\}//{tleave}
