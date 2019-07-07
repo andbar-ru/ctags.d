@@ -6,11 +6,11 @@
 --kinddef-vue=p,property,properties
 --kinddef-vue=n,name,names
 --kinddef-vue=f,function,functions
+--kinddef-vue=e,event,events
 
 --_roledef-vue=p.watched,watched property
 --_roledef-vue=p.prop,property as prop
---extras=+r
---fields=+r
+--_roledef-vue=e.emitted,emitted event
 
 --_tabledef-vue=toplevel
 --_tabledef-vue=htmlComment
@@ -111,6 +111,8 @@
 --_mtable-regex-vue=block/\}//{tleave}
 --_mtable-regex-vue=block/\/\///{tenter=lineComment}
 --_mtable-regex-vue=block/\/\*//{tenter=blockComment}
+--_mtable-regex-vue=block/\$on\(['"]([^'":]+:[^'"]+)['"]/\1/e/
+--_mtable-regex-vue=block/\$emit\(['"]([^'":]+:[^'"]+)['"]/\1/e/{_role=emitted}
 --_mtable-regex-vue=block/'//{tenter=singleQuoteString}
 --_mtable-regex-vue=block/"//{tenter=doubleQuoteString}
 --_mtable-regex-vue=block/\{//{tenter=block}
