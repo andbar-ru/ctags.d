@@ -100,7 +100,7 @@
 --_mtable-regex-vue=component/['"]?components['"]?: *\{/components/o/{tenter=components}{scope=set}
 --_mtable-regex-vue=component/['"]?props['"]?: *\{/props/o/{tenter=propsObject}{scope=set}
 --_mtable-regex-vue=component/['"]?props['"]?: *\[/props/o/{tenter=propsArray}{scope=set}
---_mtable-regex-vue=component/['"]?data['"]?:?[^(\n]*\( *\) *\{/data/o/{tenter=data}{scope=set}
+--_mtable-regex-vue=component/['"]?data['"]?:?[^(\n]*\( *\):? *\{/data/o/{tenter=data}{scope=set}
 --_mtable-regex-vue=component/['"]?computed['"]?: *\{/computed/o/{tenter=computed}{scope=set}
 --_mtable-regex-vue=component/['"]?methods['"]?: *\{/methods/o/{tenter=methods}{scope=set}
 --_mtable-regex-vue=component/['"]?watch['"]?: *\{/watch/o/{tenter=watch}{scope=set}
@@ -154,7 +154,8 @@
 --_mtable-regex-vue=data/\}//{tleave}
 --_mtable-regex-vue=data/\/\///{tenter=lineComment}
 --_mtable-regex-vue=data/\/\*//{tenter=blockComment}
---_mtable-regex-vue=data/\{//{tenter=dataBlock}
+--_mtable-regex-vue=data/return *\{//{tenter=dataBlock}
+--_mtable-regex-vue=data/['"]?([[:alnum:]$_-]+)['"]?:/\1/p/{scope=ref}
 --_mtable-regex-vue=data/.//
 
 --_mtable-regex-vue=dataBlock/\}//{tleave}
