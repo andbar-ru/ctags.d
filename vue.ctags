@@ -7,6 +7,7 @@
 --kinddef-vue=n,name,names
 --kinddef-vue=f,function,functions
 --kinddef-vue=e,event,events
+--kinddef-vue=v,variable,variables
 
 --_roledef-vue=p.watched,watched property
 --_roledef-vue=p.prop,property as prop
@@ -37,7 +38,7 @@
 --_mtable-regex-vue=toplevel/<!--//{tenter=htmlComment}
 --_mtable-regex-vue=toplevel/<template[^>]*>/template/t/{tenter=template}
 --_mtable-regex-vue=toplevel/<style ?[^>]*>/style/t/{tenter=style}{_guest=css,0end,}{scope=set}
---_mtable-regex-vue=toplevel/<script>//{tenter=script}
+--_mtable-regex-vue=toplevel/<script[^>]*>//{tenter=script}
 --_mtable-regex-vue=toplevel/<([[:alpha:]_][[:alnum:]_-]*)[^>]*>/\1/t/{tenter=toplevelTag}
 --_mtable-regex-vue=toplevel/.//
 
@@ -57,8 +58,11 @@
 --_mtable-regex-vue=script/\/\*//{tenter=blockComment}
 --_mtable-regex-vue=script/'//{tenter=singleQuoteString}
 --_mtable-regex-vue=script/"//{tenter=doubleQuoteString}
+--_mtable-regex-vue=script/const *([[:alpha:]_][[:alnum:]$_-]*)/\1/v/
+--_mtable-regex-vue=script/var *([[:alpha:]_][[:alnum:]$_-]*)/\1/v/
+--_mtable-regex-vue=script/let *([[:alpha:]_][[:alnum:]$_-]*)/\1/v/
 --_mtable-regex-vue=script/\{//{tenter=block}
---_mtable-regex-vue=script/export default *\{\n///{tenter=component}
+--_mtable-regex-vue=script/export default *(Vue\.extend\()?\{\n///{tenter=component}
 --_mtable-regex-vue=script/.//
 
 --_mtable-regex-vue=toplevelTag/<\/[^>]+>//{tleave}
